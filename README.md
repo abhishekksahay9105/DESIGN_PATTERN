@@ -1,4 +1,4 @@
-### SOLID Principle for Opps
+# SOLID Principle for Opps
 
 ```
 S-Single Responsibility Principle
@@ -30,4 +30,36 @@ I : Interface should be such that client should not implement unnecessary functi
 D : class should depends on interface rather than concreate class (Facade). Koi bhi member variable banao to wo interface type ka banao
 ```
 
+# Design Pattern
+
+```
+1. Creational Design Pattern
+    - Factory
+    - Abstract Factory
+    - Builder
+    - Prototype
+    - Singleton
+
+2. Structural Design Pattern
+    - Adaptor
+    - Bridge
+    - Composite
+    - Decorator
+    - Facade
+    - Proxy
+    - Flyweight
+
+3. Behavioral Design Pattern
+    - Chain of Responsibility
+    - Command
+    - Iterator
+    - Mediator
+    - Memento
+    - State
+    - Strategy
+    - Template
+    - Visitor
+    - Null Object
+    - Observer
+```
 
