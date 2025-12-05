@@ -3,6 +3,11 @@
 #include <string>
 #include <cstdlib>
 
+#include "SnakeLadderDice.h"
+#include "SnakeLadderPlayer.h"
+#include "SnakeLadderBoard.h"
+#include "SnakeLadderGame.h"
+
 static Game* Game::Create ()
 {
     Game* game = new Game ();

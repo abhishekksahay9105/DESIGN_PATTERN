@@ -1,5 +1,5 @@
 #include "SnakeLadderBoard.h"
-
+#include "SnakeLadderPlayer.h"
 
 //--------------------------------------------------------------------------------------------------
 // Board class
@@ -16,7 +16,6 @@ Board::Board(int aRows, int aCols) : mRows(aRows), mCols(aCols)
 {
     mLayout.resize(mRows, std::vector <Cell*> (mCols, nullptr));
 }
-
 
 bool Board::AddedCell (std::vector<std::pair<int, int>> aSnakes, std::vector<std::pair<int, int>> aLadders)
 {
