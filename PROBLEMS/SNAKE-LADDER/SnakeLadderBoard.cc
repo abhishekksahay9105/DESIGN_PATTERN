@@ -17,6 +17,17 @@ Board::Board(int aRows, int aCols) : mRows(aRows), mCols(aCols)
     mLayout.resize(mRows, std::vector <Cell*> (mCols, nullptr));
 }
 
+Board::~Board()
+{
+    for (int i = 0; i < mRows; ++i)
+    {
+        for (int j = 0; j < mCols; ++j)
+        {
+            delete mLayout[i][j];
+        }
+    }
+}
+
 bool Board::AddedCell (std::vector<std::pair<int, int>> aSnakes, std::vector<std::pair<int, int>> aLadders)
 {
     for (auto snake : aSnakes)

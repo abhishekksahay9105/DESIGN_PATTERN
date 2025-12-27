@@ -88,6 +88,8 @@ class Board
     public:
         static Board* CreateBoard (int aRows, int aCols, std::vector<std::pair<int, int>> aSnakes, std::vector<std::pair<int, int>> aLadders);
 
+        ~Board();
+
     private:
         Board(int aRows, int aCols);
 
