@@ -1,3 +1,30 @@
+/*
+    1. The Decorator Design Pattern is a structural pattern used to add new behavior or responsibilities
+       to an object dynamically, without modifying its original class.
+    2. Real‑Life Analogy
+        Imagine you buy a plain coffee.
+        Then you tell the barista to add:
+
+        Milk
+        Sugar
+        Whipped cream
+
+        You don’t change the coffee machine itself.
+        You just wrap the coffee with extra additions.
+        This is the decorator pattern.
+
+    3. When to Use Decorator Pattern
+            Use it when:
+                You want to add features to objects dynamically.
+                You want to avoid huge inheritance hierarchies.
+                You don’t want to modify existing code.
+
+            Don’t use it when:
+                You need to change behavior for all objects (use inheritance instead).
+
+ */
+
+
 #include <iostream>
 #include <string>
 

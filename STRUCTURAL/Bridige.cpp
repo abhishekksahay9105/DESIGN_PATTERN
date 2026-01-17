@@ -1,3 +1,13 @@
+/*
+    (interview trick)
+        Pattern   |              Purpose                        |
+        ----------|---------------------------------------------|
+        Adapter   |  Make incompatible interfaces work together |
+        Bridge    |  Separate abstraction from implementation   |
+        Decorator |  Add responsibilities dynamically           |
+        Composite |  Treat single & group objects the same      |
+*/
+
 #include <iostream>
 
 //Abstraction : shape

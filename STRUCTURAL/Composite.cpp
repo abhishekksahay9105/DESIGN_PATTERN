@@ -1,3 +1,22 @@
+
+/*
+    1. The Composite Pattern lets you treat individual objects and groups of objects uniformly.
+    2. Real-Life Analogy
+            A folder structure:
+
+                File (leaf)
+                Folder (composite)
+
+                Contains files
+                Contains folders
+
+            You can perform actions like:
+                delete
+                move
+                rename
+                on both files and folders the same way.
+
+*/
 #include <iostream>
 #include <vector>
 

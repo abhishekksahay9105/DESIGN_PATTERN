@@ -1,3 +1,9 @@
+/*
+    1. The Adapter Pattern is a structural design pattern used to make incompatible interfaces work together.
+*/
+
+
+
 #include <bits/stdc++.h>
 using namespace std;
 

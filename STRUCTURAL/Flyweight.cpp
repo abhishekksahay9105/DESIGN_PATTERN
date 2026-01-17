@@ -1,3 +1,13 @@
+
+/*
+    1. The Flyweight Pattern is a structural design pattern used to reduce memory usage by sharing common, reusable objects instead of creating duplicates.
+    When to Use Flyweight Pattern
+    2. Use it when:
+        You need lots of small objects
+        Many of them share common immutable data
+        Memory usage is becoming a problem
+        Object creation is expensive
+*/
 #include <iostream>
 #include <unordered_map>
 
