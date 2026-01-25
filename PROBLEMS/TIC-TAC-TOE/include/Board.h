@@ -26,7 +26,6 @@ class Board
 
         bool IsFull() const;
 
-    private:
         bool IsValidMove (Move aMove) const;
         
     protected:

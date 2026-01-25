@@ -14,4 +14,4 @@ $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -rf $(OBJS)

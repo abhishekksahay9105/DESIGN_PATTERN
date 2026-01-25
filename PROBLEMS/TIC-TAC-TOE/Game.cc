@@ -2,6 +2,8 @@
 #include <iostream>
 
 
+static const std::string cInvalid = "Invalid Move! Re-enter the move.";
+
 //======================================================================================================================
 // class Game
 // File: Game.cc
@@ -57,11 +59,9 @@ bool Game::Player1Move (std::string& aErrMsg)
 
     Move move;
     std::string errMsg;
-    std::cin >> move.mRow >> move.mCol;
     while(!(mPlayer1->chooseMove(*mBoard, move, 'X') && mBoard->Place(move, 'X', errMsg)))
     {
-        std::cout << errMsg << std::endl;
-        std::cin >> move.mRow >> move.mCol;
+        std::cout << cInvalid << std::endl;
         errMsg.clear();
     }
     mBoard->Print ();
@@ -78,13 +78,11 @@ bool Game::Player2Move (std::string& aErrMsg)
         // Player 2's turn
         std::cout << mPlayer2->getName() << "'s turn (O): ";
         Move move;
-        std::cin >> move.mRow >> move.mCol;
-    while(!(mPlayer2->chooseMove(*mBoard, move, 'O') && mBoard->Place(move, 'O', errMsg)))
-    {
-        std::cout << errMsg << std::endl;
-        std::cin >> move.mRow >> move.mCol;
-        errMsg.clear();
-    }
+        while(!(mPlayer2->chooseMove(*mBoard, move, 'O') && mBoard->Place(move, 'O', errMsg)))
+        {
+            std::cout << cInvalid << std::endl;
+            errMsg.clear();
+        }
     }
     else
     {
@@ -103,29 +101,38 @@ bool Game::Player2Move (std::string& aErrMsg)
 
 bool Game::StartGame ()
 {
-    bool gameOver = false;
-
-    while (!gameOver)
+    std::string retry = "y";
+    while (retry == "y" || retry == "Y")
     {
-        std::string errMsg;
+
+        bool gameOver = false;
+        std::cout << "Starting a new game!" << std::endl;
+        while (!gameOver)
+        {
+            std::string errMsg;
         
-        Player1Move (errMsg);
+            Player1Move (errMsg);
+        
 
+            if (mBoard->CheckWin('X') || mBoard->IsFull())
+            {
+                gameOver = true;
+                std::cout << mPlayer1->getName() << " wins!" << std::endl;
+                break;
+            }
 
-        if (mBoard->CheckWin('X') || mBoard->IsFull())
-        {
-            gameOver = true;
-            break;
+            Player2Move (errMsg);
+
+            if (mBoard->CheckWin('O') || mBoard->IsFull())
+            {
+                gameOver = true;
+                std::cout << mPlayer2->getName() << " wins!" << std::endl;
+                break;
+            }
         }
 
-        Player2Move (errMsg);
-
-         if (mBoard->CheckWin('O') || mBoard->IsFull())
-        {
-            gameOver = true;
-            break;
-        }
-
+        std::cout << "Play again? (y/n): ";
+        std::cin >> retry;
     }
 
     return true;

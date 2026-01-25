@@ -4,24 +4,28 @@
 //========================================================================
 // class HumanStrategy
 //========================================================================
-bool HumanStrategy::chooseMove(const Board& board, Move& move, char mark)
+bool HumanStrategy::chooseMove(const Board& aBoard, Move& aMove, char mark)
 {
+    std::cout << "HumanStrategy::chooseMove";
     int row, col;
     std::cin >> row >> col;
-    move.mRow = row;
-    move.mCol = col;
-    std::cout << &board << mark;
-    return true;
+    aMove.mRow = row;
+    aMove.mCol = col;
+    std::cout << mark << std::endl;
+    return aBoard.IsValidMove (aMove);
 }
 
 
 //========================================================================
 // class AIStategy
 //========================================================================
-bool AIStrategy::chooseMove(const Board& board, Move& move, char mark)
+bool AIStrategy::chooseMove(const Board& aBoard, Move& aMove, char mark)
 {
-    std::cout << &board << mark;
-    move.mRow = 0;
-    move.mCol = 0;
-    return false;
+    std::cout << "AIStrategy::chooseMove";
+    int row, col;
+    std::cin >> row >> col;
+    aMove.mRow = row;
+    aMove.mCol = col;
+    std::cout << mark << std::endl;
+    return aBoard.IsValidMove (aMove);
 }
