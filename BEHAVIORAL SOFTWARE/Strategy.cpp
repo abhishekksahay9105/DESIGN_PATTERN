@@ -1,3 +1,15 @@
+/*
+    1. The Strategy Pattern is a behavioral design pattern that allows you to define a family of algorithms, put each algorithm in a separate class,
+       and make them interchangeable at runtime.
+    2. Why do we need Strategy Pattern?
+        Because sometimes you want to:
+            Change algorithm dynamically
+            Avoid large if-else or switch statements
+            Follow the Open/Closed Principle
+            (add new strategies without modifying existing code)
+            Separate behavior from context
+*/
+
 #include <iostream>
 
 class SortingStrategy
@@ -27,7 +39,7 @@ class QuickSort : public SortingStrategy
 class SortContext
 {
     private:
-        SortingStrategy* mStrategy;
+        std::unique_ptr<SortingStrategy> mStrategy;
     
     public:
         void SetStrategy (SortingStrategy* aStrategy)

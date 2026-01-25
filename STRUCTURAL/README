@@ -1,0 +1,7 @@
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Category   | Focus              | Purpose                                 |  Key_Question_Solved                 |                Examples                      |
+| -----------|--------------------|-----------------------------------------|--------------------------------------|----------------------------------------------|
+| Creational | Object creation    | Flexibility & reuse in creating objects | “How to create objects efficiently?” | Factory, Builder, Singleton                  |
+| Structural | Object composition | Forming flexible class structures       | “How to organize classes/objects?”   | Adapter, Bridge, Composite, Decorator, Proxy |
+| Behavioral | Object interaction | Communication & responsibility          | “How objects talk/behave?”           | Strategy, Observer, Command, State, Mediator |
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------

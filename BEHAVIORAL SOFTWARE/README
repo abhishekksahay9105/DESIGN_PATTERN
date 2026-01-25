@@ -1,0 +1,21 @@
+1. What Are Behavioral Design Patterns?
+    Behavioral patterns focus on how objects communicate and interact with each other.
+
+    They help define:
+        How responsibilities are distributed
+        How objects collaborate
+        The flow of information between objects
+        Flexibility in communication while reducing coupling
+
+        They deal with object behavior, not object creation or structure.
+
+2. Purpose of Behavioral Patterns
+    Behavioral patterns aim to answer:
+        “How do objects talk to each other?”
+        “How do we design communication while avoiding tight coupling?”
+        “How do we write extendable and clean behavior logic?”
+
+3. Quick Summary in One Line
+    Creational patterns → how objects are created
+    Structural patterns → how objects are organized
+    Behavioral patterns → how objects communicate

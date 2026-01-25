@@ -1,3 +1,14 @@
+/*
+    1. The Observer Pattern is a behavioral design pattern where one object (Subject) maintains a list of dependent objects (Observers) and
+       automatically notifies them whenever its state changes.
+    2. Why Observer Pattern?
+        We need Observer when:
+            ✔ Many objects need to react when one object changes
+            ✔ You want to avoid tightly coupling objects
+            ✔ You want a clean publisher → subscriber model
+            ✔ You want dynamic subscription (attach/detach observers at runtime)
+*/
+
 #include <iostream>
 #include <vector>
 
