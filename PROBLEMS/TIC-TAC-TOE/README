@@ -1,0 +1,13 @@
+List of Component:
+    Game
+        Board
+        Player
+        Display
+        Winner Decider
+List of Activities:
+    Move
+
+
+start->player_move->(undo_move)check_winner->display_winner->end
+    
+    
