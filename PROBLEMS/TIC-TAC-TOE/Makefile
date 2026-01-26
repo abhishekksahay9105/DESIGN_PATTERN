@@ -2,7 +2,7 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -Wall -Wextra -Iinclude
 TARGET = tic_tac_toe
-SRCS = GameMain.cc Game.cc Board.cc Player.cc MoveStrategy.cc
+SRCS = GameMain.cc Game.cc Board.cc MoveStrategy.cc Player.cc
 OBJS = $(SRCS:.cc=.o)
 
 
@@ -12,6 +12,5 @@ OBJS = $(SRCS:.cc=.o)
 
 $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
-
-clean:
 	rm -rf $(OBJS)
+

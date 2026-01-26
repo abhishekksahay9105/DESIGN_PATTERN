@@ -2,39 +2,56 @@
 #include <iostream>
 
 
-static const std::string cInvalid = "Invalid Move! Re-enter the move.";
-
 //======================================================================================================================
 // class Game
 // File: Game.cc
 // Description: Implementation of the Game class using Template Method pattern
 //======================================================================================================================
 
+bool Game::RegisterPlayer (std::unique_ptr<Player>& aPlayer, char aMark)
+{
+    bool status = false;
+    if (!aPlayer)
+    {
+        std::cout << "Enter name for Player (" << aMark << "): ";
+        std::string playerName;
+        std::cin >> playerName;
+        
+        aPlayer = PlayerFactory::CreatePlayer(playerName, aMark);
+    }
+
+    while (!status)
+    {
+        std::cout << "Real human or AI for  " << aPlayer->getName() << " ? (h/a): ";
+        char playerType;
+        std::cin >> playerType;
+     
+        if (playerType == 'h' || playerType == 'H')
+        {
+            status = aPlayer->SetStrategy(Human);
+        }
+        else if (playerType == 'a' || playerType == 'A')
+        {
+            status = aPlayer->SetStrategy(AI);
+        }
+        else
+        {
+            std::cout << "Invalid player type selected." << std::endl;
+        }
+    }
+
+    return status;
+}
+
 bool Game::RegisterPlayers ()
 {
+    bool status = true;
     // Registration logic for players
-    std::string player1Name, player2Name;
-    std::cout << "Enter name for Player 1 (X): ";
-    std::cin >> player1Name;
-    mPlayer1 = PlayerFactory::CreatePlayer(player1Name, Human);
+    mPlayerList.resize(2);
+    status &= RegisterPlayer (mPlayerList[0], 'X');
+    status &= RegisterPlayer (mPlayerList[1], 'O');
 
-    std::cout << "Real human or AI for Player 2? (h/a): ";
-    char player2Type;
-    std::cin >> player2Type;
-
-    if (player2Type == 'h' || player2Type == 'H')
-    {
-        std::cout << "Enter name for Player 2 (O): ";
-        std::cin >> player2Name;
-        mPlayer2 = PlayerFactory::CreatePlayer(player2Name, Human);
-    }
-    else
-    {
-        player2Name = "Computer";
-        mPlayer2 = PlayerFactory::CreatePlayer("Computer", AI);
-    }
-
-    return true;
+    return status;
 }
 
 bool Game::Run ()
@@ -49,90 +66,49 @@ bool Game::Run ()
 
 bool Game::SetupGame ()
 {
-    mBoard = std::make_unique<Board> (3, 3);
+    int row = 3;
+    int col = 3;
+    std::cout << "Setting up a " << row << "x" << col << " board." << std::endl;
+    std::cin >> row >> col;
+    mBoard = std::make_unique<Board> (row, col);
     return mBoard->Initialize ();
 }
-
-bool Game::Player1Move (std::string& aErrMsg)
-{
-    std::cout << mPlayer1->getName() << "'s turn (X): ";
-
-    Move move;
-    std::string errMsg;
-    while(!(mPlayer1->chooseMove(*mBoard, move, 'X') && mBoard->Place(move, 'X', errMsg)))
-    {
-        std::cout << cInvalid << std::endl;
-        errMsg.clear();
-    }
-    mBoard->Print ();
-
-    aErrMsg.clear();
-    return true;
-}
-
-bool Game::Player2Move (std::string& aErrMsg)
-{
-    std::string errMsg;
-    if (mPlayer2->isAIPlayer() == false)
-    {
-        // Player 2's turn
-        std::cout << mPlayer2->getName() << "'s turn (O): ";
-        Move move;
-        while(!(mPlayer2->chooseMove(*mBoard, move, 'O') && mBoard->Place(move, 'O', errMsg)))
-        {
-            std::cout << cInvalid << std::endl;
-            errMsg.clear();
-        }
-    }
-    else
-    {
-        Move move;
-        mPlayer2->chooseMove(*mBoard, move, 'O');
-        {
-            mBoard->Place(move, 'O', errMsg);
-            // Check for winner or draw here...
-        }
-    }
-    aErrMsg.clear();
-    mBoard->Print ();
-    return true;
-}
-
 
 bool Game::StartGame ()
 {
     std::string retry = "y";
     while (retry == "y" || retry == "Y")
     {
-
         bool gameOver = false;
-        std::cout << "Starting a new game!" << std::endl;
         while (!gameOver)
         {
-            std::string errMsg;
-        
-            Player1Move (errMsg);
-        
-
-            if (mBoard->CheckWin('X') || mBoard->IsFull())
+            for (int index = 0; index < int(mPlayerList.size()); ++index)
             {
-                gameOver = true;
-                std::cout << mPlayer1->getName() << " wins!" << std::endl;
-                break;
-            }
-
-            Player2Move (errMsg);
-
-            if (mBoard->CheckWin('O') || mBoard->IsFull())
-            {
-                gameOver = true;
-                std::cout << mPlayer2->getName() << " wins!" << std::endl;
-                break;
+                mPlayerList[index]->Move1 (mBoard);
+                if (mBoard->CheckWin('X'))
+                {
+                    gameOver = true;
+                    std::cout << mPlayerList[index]->getName() << " wins!" << std::endl;
+                    break;
+                }
+                else if (mBoard->IsFull())
+                {
+                    gameOver = true;
+                    std::cout << "It's a draw!" << std::endl;
+                    break;
+                }
             }
         }
 
         std::cout << "Play again? (y/n): ";
         std::cin >> retry;
+        
+        std::cout << "Starting a new game!" << std::endl;
+        if (retry == "y" || retry == "Y")
+        {
+            RegisterPlayers ();
+            SetupGame ();
+        }
     }
 
     return true;

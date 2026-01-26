@@ -1,0 +1,6 @@
+
+
+Logger::Logger() // Private constructor
+{
+
+}

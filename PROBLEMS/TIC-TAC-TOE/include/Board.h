@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 #include "DataTypes.h"
 
 // class BoardObserver
@@ -32,5 +33,14 @@ class Board
         int                              mRows{3};
         int                              mCols{3};
         std::vector<std::vector<char>>   mMatrix;
+};
+
+class BoardFactory
+{
+    public:
+        static std::unique_ptr<Board> CreateBoard(int rows, int cols)
+        {
+            return std::make_unique<Board>(rows, cols);
+        }
 };
 #endif

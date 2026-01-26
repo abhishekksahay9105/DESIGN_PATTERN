@@ -16,11 +16,9 @@ class Game
 
     protected:
 
+        bool RegisterPlayer (std::unique_ptr<Player>& aPlayer, char aMark);
+
         virtual bool SetupGame ();
-
-        virtual bool Player1Move (std::string& aErrMsg);
-
-        virtual bool Player2Move (std::string& aErrMsg);
 
         virtual bool StartGame ();
 
@@ -28,7 +26,6 @@ class Game
 
     protected:
         std::unique_ptr<Board>                      mBoard;
-        std::unique_ptr<Player>                     mPlayer1;
-        std::unique_ptr<Player>                     mPlayer2;
+        std::vector<std::unique_ptr<Player>>        mPlayerList;
 };
 #endif
