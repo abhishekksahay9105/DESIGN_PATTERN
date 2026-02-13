@@ -125,7 +125,7 @@ bool Board::CheckWin(char aMark) const
 
 bool Board::IsFull() const
 {
-    bool isFull = false;
+    bool isFull = true;
     for (const auto& row : mMatrix)
     {
         for (const auto& cell : row)
