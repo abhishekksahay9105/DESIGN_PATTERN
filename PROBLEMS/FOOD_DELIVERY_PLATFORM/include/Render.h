@@ -1,14 +1,23 @@
+#ifndef _Render_h_
+#define _Render_h_
 
-class ResturantDB;
-class Renderer
+#include <memory>
+
+namespace fds
 {
-		private:
-				std::shared_ptr<ResturantDB> mResturantDB{nullptr};
+		class ResturantDB;
+		class Renderer
+		{
+				private:
+						std::shared_ptr<ResturantDB> mResturantDB{nullptr};
 
-		public:
-				Renderer (std::shared_ptr<ResturantDB> aResturantDB);
+				public:
+						Renderer (std::shared_ptr<ResturantDB> aResturantDB);
 
-				bool ShowDefault ();
+						bool ShowDefault () {return false;} 
 
-				bool showFiltered ();
-};
+						bool showFiltered () {return false;}
+		};
+}
+
+#endif

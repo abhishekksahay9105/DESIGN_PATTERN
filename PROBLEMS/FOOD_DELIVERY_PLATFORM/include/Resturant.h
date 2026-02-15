@@ -1,34 +1,58 @@
 #ifndef _Resturant_h_
 #define _Resturant_h_
+
 #include <string>
+#include <memory>
+#include <unordered_map>
 
-class Resturant
+namespace fds
 {
-	private:
-		std::string 					mResName;
-		int								mResturantId;
-		std::shared_ptr<ContactInfo>	mContact{nullptr};
-		std::shared_ptr<DishDB>			mDishDb{nullptr};
+		class DishDB;
+		class ContactInfo;
 
-	public:
-		static std::shared_ptr<Resturant> Create ();
-		
-		~Resturant () = default;
+		class Resturant
+		{
+				private:
+						std::string 					mResName;
+						int								mResturantId;
+						std::shared_ptr<ContactInfo>	mContact{nullptr};
+						std::shared_ptr<DishDB>			mDishDb{nullptr};
 
-		int getResturantId () const {return mResturantId;}
-		bool setResturantId (int aResturantId) {mResturantId = aResturantId}
+				public:
+						static std::shared_ptr<Resturant> Create ();
 
-		std::shared_ptr<ContactInfo> get_ResturantContactInfo () const {return mContact;}
+						Resturant (std::string aResName,  std::shared_ptr<ContactInfo> aContact);
+						~Resturant () = default;
 
-		std::shared_ptr<DishDB> get_DishDb {return mDishDb;}
+						int getResturantId () const {return mResturantId;}
+						void setResturantId (int aResturantId) {mResturantId = aResturantId;}
 
-	private:
-		Resturant (std::string aResName,  std::shared_ptr<ContactInfo> aContact);
-};
+						std::string getResturantName () const {return mResName;}
 
-class ResturantDB
-{
-		private:
-		public:
-};
+						std::shared_ptr<ContactInfo> get_ResturantContactInfo () const {return mContact;}
+
+						std::shared_ptr<DishDB> get_DishDb () {return mDishDb;}
+
+		};
+
+		class ResturantDB
+		{
+				private:
+						static std::shared_ptr<ResturantDB> 							mResturantDB;
+
+						int																mLastResturantId{0};
+
+						std::unordered_map<int, std::shared_ptr<Resturant>>       		mResturantList;
+						std::unordered_map<std::string, std::shared_ptr<Resturant>>     mEmailResturantList;
+
+				public:
+						static std::shared_ptr<ResturantDB> get_ResturantDB ();
+
+						std::unordered_map<int, std::shared_ptr<Resturant>> get_ResturantList () const {return mResturantList;}
+
+						bool Add_Resturant (std::shared_ptr<Resturant> aResturant);
+		};
+
+
+}
 #endif

@@ -1,19 +1,48 @@
-class FoodDeliverySystem
+#ifndef _FoodDeliverySystem_h_
+#define _FoodDeliverySystem_h_
+
+#include <memory>
+
+namespace fds
 {
-		private:
-				std::shared_ptr<Renderer>			mRender{nullptr};
-				std::shared_ptr<OrderDB>			mOrderDB{nullptr};
-				std::shared_ptr<ResturantDB>		mResturantDB{nullptr};
-				std::shared_ptr<CustomerDB>			mCustomerDB{nullptr};
+		class Renderer;
+		class OrderDB;
+		class ResturantDB;
+		class CustomerDB;
+		typedef enum OrderStatusT
+		{
+				cRenderDishes = 0,
+				cLoginAsCustomer,
+				cLoginAsResturant,
+				cOrderDishes,
 
-		public:
-				FoodDeliverySystem ();
+		} OrderStatusT;
 
-				~FoodDeliverySystem () = default;
+		class FoodDeliverySystem
+		{
+				private:
+						std::shared_ptr<Renderer>			mRender{nullptr};
+						std::shared_ptr<OrderDB>			mOrderDB{nullptr};
+						std::shared_ptr<ResturantDB>		mResturantDB{nullptr};
+						std::shared_ptr<CustomerDB>			mCustomerDB{nullptr};
 
-				bool RegisterResturant ();
+				public:
+						static std::shared_ptr<FoodDeliverySystem> Create ();
 
-				bool RegisterCustomer ();
+						bool Execute ();
 
-				
-};
+						bool RenderDishes ();
+
+						bool LoginAsResturant ();
+
+						FoodDeliverySystem ();
+
+						~FoodDeliverySystem () = default;
+
+						bool RegisterResturant ();
+
+						bool RegisterCustomer ();				
+		};
+}
+
+#endif

@@ -1,28 +1,44 @@
-#ifndef _Data_Types_h_
-#define _Data_Types_h_
+#ifndef _ContactInfo_h_
+#define _ContactInfo_h_
 
+#include <memory>
 #include <string>
+
 namespace fds
 {
-	struct Address
-	{
-		std::string 		mFalt;
-		std::string 		mSociety;
-		std::string 		mArea;
-		std::string	    	mDistrict;
-		std::string 		mPincode;
-		unsigned long long 	mLogitude;
-		unsigned long long 	mLatitude;
+	class Address
+	{ 
+			public:
+					static std::shared_ptr<Address> Create ();
+
+			private:
+
+			public:
+					Address () {}
+					std::string 		mFalt;
+					std::string 		mSociety;
+					std::string 		mArea;
+					std::string	    	mDistrict;
+					std::string 		mPincode;
+//					unsigned long long 	mLogitude;
+//					unsigned long long 	mLatitude;
 	};
 
-	struct ContactInfo
+	class ContactInfo
 	{
-		std::string 		mPhoneNo;
-		std::string 		mSecPhoneNo;
-		std::string 		mEmail;
-		std::string 		mSecEmail;
-		Address				mAddress;
-		Address				mSecAddress;
+			public:
+					static std::shared_ptr<ContactInfo> Create ();
+
+			private:
+
+			public:
+					ContactInfo () {}
+					std::string 							mPhoneNo;
+					std::string 							mSecPhoneNo;
+					std::string 							mEmail;
+					std::string 							mSecEmail;
+					std::shared_ptr<Address>				mAddress{nullptr};
+					std::shared_ptr<Address>				mSecAddress{nullptr};
 	};
 }
 #endif

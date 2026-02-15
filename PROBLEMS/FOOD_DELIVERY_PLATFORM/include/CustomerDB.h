@@ -1,6 +1,9 @@
 #ifndef _CustomerDB_h_
 #define _CustomerDB_h_
 
+#include <memory>
+#include <unordered_map>
+class ContactInfo;
 namespace fds
 {
 

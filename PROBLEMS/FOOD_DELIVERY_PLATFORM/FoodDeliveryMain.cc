@@ -1,38 +1,13 @@
-
-
-typedef enum todo
-{
-		cRenderDishes = 0,
-		cLoginAsCustomer,
-		cLoginAsResturant,
-		cOrderDishes,
-		
-} todo;
-
+#include <iostream>
+#include "FoodDeliverySystem.h"
+#include <memory>
 
 int main ()
 {
-		int isServerdown = false;
-		
-		todoT mState = cRenderDishes;
-		while (!isServerdown)
-		{
-
-				switch (mState)
-				{
-						case cRenderDishes:
-								break;
-						case cLoginAsCustomer:
-								break;
-						case cLoginAsResturant:
-								
-								break;
-						case cOrderDishes:
-								break;
-						default:
-								mState = cRenderDishes;
-								break;
-				}
-		}
+		std::shared_ptr<fds::FoodDeliverySystem> foodDeliverySystem = fds::FoodDeliverySystem::Create ();
+		if (foodDeliverySystem)
+			std::cout << "khush raho bhai" << std::endl;
+				
+		return 0;
 }
 
