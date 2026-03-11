@@ -1,0 +1,7 @@
+vehicle<car, motor, truck>
+counter<enter>
+ticket
+parking area<compact, regular, oversized>
+counter<exit>
+Fee_calculator(ticket)
+
