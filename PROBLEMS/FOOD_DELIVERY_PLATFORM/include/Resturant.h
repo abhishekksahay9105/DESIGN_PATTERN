@@ -10,7 +10,7 @@ namespace fds
 		class DishDB;
 		class ContactInfo;
 
-		class Resturant
+		class Resturant : public std::enable_shared_from_this<Resturant>
 		{
 				private:
 						std::string 					mResName;
@@ -31,8 +31,11 @@ namespace fds
 
 						std::shared_ptr<ContactInfo> get_ResturantContactInfo () const {return mContact;}
 
-						std::shared_ptr<DishDB> get_DishDb () {return mDishDb;}
+						std::shared_ptr<DishDB> get_DishDb () const {return mDishDb;}
 
+						bool Add_Dish ();
+
+						bool Print ();
 		};
 
 		class ResturantDB
@@ -43,14 +46,21 @@ namespace fds
 						int																mLastResturantId{0};
 
 						std::unordered_map<int, std::shared_ptr<Resturant>>       		mResturantList;
+
 						std::unordered_map<std::string, std::shared_ptr<Resturant>>     mEmailResturantList;
 
 				public:
 						static std::shared_ptr<ResturantDB> get_ResturantDB ();
 
+						std::shared_ptr<Resturant> get_Resturant (int aRestId) const;
+
+						std::shared_ptr<Resturant> get_Resturant (std::string aEmail) const;
+
 						std::unordered_map<int, std::shared_ptr<Resturant>> get_ResturantList () const {return mResturantList;}
 
 						bool Add_Resturant (std::shared_ptr<Resturant> aResturant);
+
+						bool Print ();
 		};
 
 

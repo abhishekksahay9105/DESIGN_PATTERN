@@ -15,6 +15,9 @@ namespace fds
 
 			public:
 					Address () {}
+
+					bool Print () const;
+			public:
 					std::string 		mFalt;
 					std::string 		mSociety;
 					std::string 		mArea;
@@ -29,10 +32,12 @@ namespace fds
 			public:
 					static std::shared_ptr<ContactInfo> Create ();
 
-			private:
-
 			public:
 					ContactInfo () {}
+
+					bool Print () const;
+
+			public:
 					std::string 							mPhoneNo;
 					std::string 							mSecPhoneNo;
 					std::string 							mEmail;

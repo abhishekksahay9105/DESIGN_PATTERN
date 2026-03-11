@@ -1,4 +1,5 @@
 #include <memory>
+#include <iostream>
 #include "FoodDeliverySystem.h"
 #include "Render.h"
 #include "OrderDB.h"
@@ -30,63 +31,98 @@ FoodDeliverySystem::FoodDeliverySystem ()
 
 bool FoodDeliverySystem::Execute ()
 {
+		printf ("FoodDeliverySystem::Execute\n");
+
 		int isServerdown = false;
 		OrderStatusT mState = cRenderDishes;
 		while (!isServerdown)
 		{
-				switch (mState)
+				int abc;
+				std::cout << "Enter the Work that you want to do: \n";
+				if(std::cin >> abc)
 				{
-						case cRenderDishes:
+
+						mState =  OrderStatusT(abc); 
+						switch (mState)
 						{
-								RenderDishes ();
-								break;
+								case cRenderDishes:
+										{
+												printf ("cRenderDishes\n");
+												RenderDishes ();
+												break;
+										}
+								case cLoginAsCustomer:
+										break;
+								case cLoginAsResturant:
+										{
+												printf ("cLoginAsResturant\n");
+												RegisterResturant ();
+												break;
+										}
+								case cAddDishes:
+										{
+												printf ("cAddDishes\n");
+												AddDishesToResturant ();
+												break;
+										}
+								case cOrderDishes:
+										break;
+								case cResturantList:
+									{
+											printf ("cResturantList");
+											PrintResturantList ();
+											break;
+									}	
+								default:
+										mState = cRenderDishes;
+										break;
 						}
-						case cLoginAsCustomer:
-								break;
-						case cLoginAsResturant:
-						{
-								LoginAsResturant ();
-								break;
-						}
-						case cOrderDishes:
-								break;
-						default:
-								mState = cRenderDishes;
-								break;
 				}
 		}
 
 		return true;
 }
 
-bool  FoodDeliverySystem::RenderDishes ()
+bool FoodDeliverySystem::RenderDishes ()
 {
+	printf ("FoodDeliverySystem::RenderDishes\n");
+
 	bool status = false;
 	if (mResturantDB)
 	{	
-		//std::unordered_map<int, std::shared_ptr<Resturant>> resturantList =   mResturantDB->get_ResturantList ();
+		std::unordered_map<int, std::shared_ptr<Resturant>> resturantList =   mResturantDB->get_ResturantList ();
 
-//		for (const auto& iterator : resturantList)
-//		{
-//				std::shared_ptr<DishDB>	dishDb = iterator.second->get_DishDb;
-//
-//				DishDB::DishIterator itr = dishDb.begin();
-//				while (itr != dishDb.end())
-//				{
-//						status = true;
-//						std::shared_ptr<Dish> dish = itr->second;
-//						dish->show ();
-//						itr++;
-//				}
-		//}
+		for (const auto& iterator : resturantList)
+		{
+				std::shared_ptr<Resturant> resturant = iterator.second;
+				std::shared_ptr<DishDB>	dishDb = resturant->get_DishDb ();
+
+				DishDB::DishIterator itr = dishDb->begin();
+				while (itr != dishDb->end())
+				{
+						status = true;
+						std::shared_ptr<Dish> dish = itr->second;
+						dish->show ();
+						itr++;
+				}
+		}
 	}
 	return status;
 }
 
-
-bool  FoodDeliverySystem::LoginAsResturant ()
+bool FoodDeliverySystem::RegisterCustomer ()
 {
-		return RegisterResturant ();
+	return true;
+}
+
+bool FoodDeliverySystem::Order ()
+{
+		return true;
+}
+
+bool FoodDeliverySystem::AddToCart ()
+{
+		return true;
 }
 
 bool FoodDeliverySystem::RegisterResturant ()
@@ -96,4 +132,46 @@ bool FoodDeliverySystem::RegisterResturant ()
 		if (mResturantDB)
 				status = mResturantDB->Add_Resturant (resturant);
 		return status;
+}
+
+bool FoodDeliverySystem::AddDishesToResturant ()
+{
+		bool status = false;
+
+		std::cout << "Enter Resturant Id\n";
+		int restId  = 0;
+
+		if (std::cin >> restId)
+		{
+			std::shared_ptr<Resturant> resturant = mResturantDB->get_Resturant (restId);
+
+			bool isAddMoreDish = true; 
+			if (resturant && isAddMoreDish)
+			{
+					resturant->Add_Dish ();
+					std::cout << "Is Add More dishes (yes/no)\n";
+					std::string isadd;
+					std::cin >> isadd;
+					if (isadd != "yes")
+						isAddMoreDish = false;
+			}
+		}
+
+		return status;
+}
+
+bool FoodDeliverySystem::RemoveDishesFromResturant ()
+{
+		return true;
+}
+
+void FoodDeliverySystem::PrintResturantList ()
+{
+		printf ("FoodDeliverySystem::PrintResturantList\n");
+		mResturantDB->Print();
+}
+
+bool RegisterDeliveryBoy ()
+{
+		return true;
 }

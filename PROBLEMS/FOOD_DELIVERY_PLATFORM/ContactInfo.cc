@@ -4,6 +4,8 @@
 using namespace fds;
 std::shared_ptr<Address> Address::Create ()
 {
+		printf ("Address::Create\n");
+
 		std::shared_ptr<Address> address = std::make_shared<Address>();
 
 		std::cout << "Enter Falt No. :\n" << std::endl;
@@ -26,6 +28,8 @@ std::shared_ptr<Address> Address::Create ()
 
 std::shared_ptr<ContactInfo> ContactInfo::Create ()
 {
+		printf ("ContactInfo::Create\n");
+
 		std::shared_ptr<ContactInfo> info = std::make_shared<ContactInfo>();
 
 		std::cout << "Enter PhoneNo :" << std::endl;
@@ -40,8 +44,20 @@ std::shared_ptr<ContactInfo> ContactInfo::Create ()
 		std::cout << "Enter Secondary mEmail :" << std::endl;
 		std::cin >>  info->mSecEmail;
 
-		info->mAddress = Address::Create ();
-		info->mSecAddress = Address::Create ();
+//		info->mAddress = Address::Create ();
+//		info->mSecAddress = Address::Create ();
 
 		return info;
+}
+
+bool ContactInfo::Print () const
+{
+		printf ("ContactInfo::Print ");
+
+		bool status = true;
+		std::cout << " Phone No. :" << mPhoneNo << std::endl;
+		std::cout << " Secondary Phone No. :" << mSecPhoneNo << std::endl;
+		std::cout << " Email :" << mEmail << std::endl;
+		std::cout << " Secondary Email :" << mSecEmail << std::endl;
+		return status;
 }

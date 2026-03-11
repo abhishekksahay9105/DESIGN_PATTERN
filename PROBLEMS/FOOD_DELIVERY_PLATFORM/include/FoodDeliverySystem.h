@@ -9,12 +9,15 @@ namespace fds
 		class OrderDB;
 		class ResturantDB;
 		class CustomerDB;
+
 		typedef enum OrderStatusT
 		{
 				cRenderDishes = 0,
 				cLoginAsCustomer,
 				cLoginAsResturant,
 				cOrderDishes,
+				cAddDishes,
+				cResturantList
 
 		} OrderStatusT;
 
@@ -29,19 +32,27 @@ namespace fds
 				public:
 						static std::shared_ptr<FoodDeliverySystem> Create ();
 
-						bool Execute ();
-
-						bool RenderDishes ();
-
-						bool LoginAsResturant ();
-
 						FoodDeliverySystem ();
 
 						~FoodDeliverySystem () = default;
 
-						bool RegisterResturant ();
+						bool Execute ();
 
-						bool RegisterCustomer ();				
+						bool RenderDishes ();
+
+						/*Function related to customer*/
+						bool RegisterCustomer ();
+						bool Order ();
+						bool AddToCart ();
+
+						/*Funtion related to Resturan*/
+						bool RegisterResturant ();
+						bool AddDishesToResturant ();
+						bool RemoveDishesFromResturant ();
+						void PrintResturantList ();
+
+						/*Function Related to Delivery Boy*/
+						bool RegisterDeliveryBoy ();
 		};
 }
 

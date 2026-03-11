@@ -22,7 +22,7 @@ namespace fds
 			std::shared_ptr<Resturant> 		mResturant{nullptr};
 
 		public:
-			Dish (std::string aDishName, int aPrice, std::string aImage,  bool aIsNonVeg);
+			Dish (std::string aDishName, int aPrice, std::string aImage,  bool aIsNonVeg, std::shared_ptr<Resturant> aResturant);
 
 			int get_DishId () const {return mDishId;}
 			int get_Price () const {return mPrice;}
@@ -42,11 +42,15 @@ namespace fds
 		private:
 			std::unordered_map<int, std::shared_ptr<Dish>>		mDishList;
 
+			int 												mLastDishId{0};
+
 		public:
 			using DishIterator =  std::unordered_map<int, std::shared_ptr<Dish>>::const_iterator;
 
 			DishIterator begin () const {return mDishList.begin();}
 			DishIterator end () const {return mDishList.end();}
+
+			int getLastDishId () const {return mLastDishId;}
 
 			int Add_DishToDB (std::shared_ptr<Dish> aDish);
 
