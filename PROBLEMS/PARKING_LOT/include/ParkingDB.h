@@ -3,8 +3,6 @@ class ParkingDB
 		public:
 				static Create ();
 
-				ParkingDB () = default;
-
 				~ParkingDB () = default;
 
 				ParkingDB (const ParkingDB&) = default;
@@ -14,9 +12,9 @@ class ParkingDB
 				ParkingDB (const ParkingDB&) = default;
 				ParkingDB& operator=(const ParkingDB&) = default;
 				
-				bool RestoreParkingDB ();
+				bool Save ();
 
-				bool SaveParkingDB ();
+				bool Restore ();
 
 				bool AddParkingSlot (std::shared_ptr<ParkingSlot> aParkingSlot);
 
@@ -25,6 +23,9 @@ class ParkingDB
 				bool AssignSlot (std::shared_ptr<Ticket> aTicket, int& aSlotId) const;
 
 				bool MarkFreeParkingSlot (int aSlotId);
+
+		private:
+				ParkingDB () = default;
 
 		private:
 				std::unordered_map<SpotSize, std::vector<std::pair<int, std::shared_ptr<ParkingSlot>>>> 			mParkingDB;

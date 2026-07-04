@@ -3,27 +3,36 @@
 class ParkingSystem : public ParkingSystemInterface
 {
 		public:
-				ParkingSystemInterface () = default;
+				ParkingSystem () = default;
 
-				~ParkingSystemInterface () = default;
+				~ParkingSystem () = default;
 				
-				// Counter
-				int AddCounter () = 0;
-				
-				bool RemoveCounter (int aCounterId) = 0;
-				
-				// Parking Slots
-				std::shared_ptr<ParkingSlot> GetEmptySlot (std::string aNamePlate, VehicleType aVehicleType) const = 0;
+				bool Intialize ();
 
-				bool ParkVehicle (std::shared_ptr<Ticket> aTicket) = 0;
+				// Function Related to Counter Counter
+				int AddCounter ();
+				
+				bool RemoveCounter (int aCounterId);
+
+				std::shared<Counter> GetCounter (int aCounterId);
+
+				//Function ParkingDB
+				int AddParkingSlot () = 0; 
+
+				bool RemoveParkingSlot (int aSlotId) = 0;
+
+				// Parking Vehicle
+				bool ParkVehicle (std::shared_ptr<TicketInterface> aTicket) = 0;
+
+				bool RemoveVehicle (std::shared_ptr<TicketInterface> aTicket) = 0;
 
 				// Ticket
-				std::shared_ptr<Ticket> GenerateTicket (std::shared_ptr<vehicle> aVehicle) = 0;
+				std::shared_ptr<TicketInterface> GenerateTicket (std::string aNamePlate, VehicleType aVehicleType) = 0;
 
-				int FeeCalculate (std::shared_ptr<Ticket> aTicket) = 0;
+				int FeeCalculate (std::shared_ptr<TicketInterface> aTicket) = 0;
 
 		private:
 				std::shared_ptr<ParkingDB>			mParkingDB{nullptr};
-				std::vector<Counter>				mCounterVec;
+				std::shared_ptr<CounterDB>			mCounterDB{nullptr};
 };
 

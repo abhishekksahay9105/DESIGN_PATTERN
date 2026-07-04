@@ -2,7 +2,7 @@
 
 class vehicle;
 class ParkingSlot;
-class Ticket
+class Ticket : public TicketInterface
 {
 		public:
 			using Clock			= std::chrono::system_clock;

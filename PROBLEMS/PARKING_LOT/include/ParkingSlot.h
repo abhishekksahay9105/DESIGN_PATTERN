@@ -1,9 +1,8 @@
 #include <memory>
 
-class ParkingSlot
+class ParkingSlot : public ParkingSlotInterface
 {
 		public:
-				static std::shared_ptr<ParkingSlot> Create ();
 
 				ParkingSlot (std::shared_ptr<Location> aLocation, SpotSize aSpotSize);
 
@@ -33,7 +32,7 @@ class CompactParkingSlot : public ParkingSlot
 				bool CanVehicleFit (vehicle aVehicle) const override;
 };
 
-class MediumParkingSlot
+class MediumParkingSlot : public ParkingSlot
 {
 		public:
 				MediumParkingSlot (std::shared_ptr<Location> aLocation) : ParkingSlot (aLocation, SpotSize::cCompact) {}
@@ -41,7 +40,7 @@ class MediumParkingSlot
 				bool CanVehicleFit (vehicle aVehicle) const override;
 };
 
-class OversizedParkingSlot
+class OversizedParkingSlot : public ParkingSlot
 {
 		public:
 				OversizedParkingSlot (std::shared_ptr<Location> aLocation) : ParkingSlot (aLocation, SpotSize::cCompact) {}

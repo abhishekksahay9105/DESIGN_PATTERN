@@ -3,8 +3,6 @@
 class vehicle
 {
 		public:
-				static std::shared_ptr<vehicle> Create ();
-
 				vehicle (std::string aNamePlate, VehicleType aVehicleType);
 				~vehicle () = default;
 
